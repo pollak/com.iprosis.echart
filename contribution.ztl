@@ -1,0 +1,42 @@
+class com.iprosis.sapui5.RangeSlider extends Component {
+
+	/* Sets the Current minimum value. */
+	void setMin(/* Minimum value */ float min) {*
+		this.min = min;
+	*}
+	
+	/* Returns Current the minimum value. */
+	float getMin() {*
+		return this.min;
+	*}
+
+	/* Sets the Current maximum value. */
+	void setMax(/* Maximum value */ float max) {*
+		this.max = max;
+	*}
+	
+	/* Returns the Current maximum value. */
+	float getMax() {*
+		return this.max;
+	*}
+
+	/* Sets the Current  value. */
+	void setValue(/* Value */ float value) {*
+		this.tickValue = value;
+	*}
+	
+	/* Returns the Current value. */
+	float getValue() {*
+		return this.tickValue;
+	*}
+	
+	/* Sets Current value description */
+	void setDesc(/* Value */ float value2) {*
+		this.valueDesc = value2;
+	*}
+	
+	/* Returns Current value description */
+	float getDesc() {*
+		return this.valueDesc;
+	*}
+}

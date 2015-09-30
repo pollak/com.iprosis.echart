@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdkExtension
+	xmlns="http://www.sap.com/bi/zen/sdk"
+	id="com.iprosis.echart"
+	title="Design Studio SDK Extension ECHART Components"
+	version="15.0"
+	vendor="iprosis">
+	<group id="iProsis" title="iProsis Custom Components"/>
+	<component
+		id="Gauge"
+		title="Gauge"
+		icon="res/gauge.png"
+		handlerType="div"
+		group="iProsis"
+		propertySheetPath="res/additional_properties_sheet/additional_properties_sheet.html"
+		databound="true">
+		<jsInclude>res/js/echarts-all.js</jsInclude>
+		<jsInclude>res/js/component.js</jsInclude>
+		<property id="Min" 			title="Min" 				type="float"		group="Layout"/>
+		<property id="Max" 			title="Max" 				type="float"		group="Layout"/>
+		<property id="Precision" 	title="Precision" 			type="int"			group="Layout"/>
+		<property id="SplitNumber" 	title="Split Number" 		type="int"			group="Layout"/>
+		<property id="Color1" 		title="Color1" 				type="Color"		group="Layout"/>
+		<property id="Color2" 		title="Color2" 				type="Color"		group="Layout"/>
+		<property id="Color3" 		title="Color3" 				type="Color"		group="Layout"/>
+		<property id="Value1" 		title="Value1" 				type="float"		group="Layout"/>
+		<property id="Value2" 		title="Value2" 				type="float"		group="Layout"/>
+		<property id="Thick" 		title="Thick" 				type="int"			group="Layout"/>
+		<property id="TickValue" 	title="Tick Value" 			type="ResultCell"	group="DataBinding"	tooltip="Data"/>
+		<property id="ValueDesc" 	title="Value Description"	type="String"		group="Layout"/>
+		<property id="onChange"		title="On Change" 			type="ScriptText"	group="Events"/>
+		
+		<initialization>
+			<defaultValue property="WIDTH">400</defaultValue>
+			<defaultValue property="HEIGHT">400</defaultValue>
+		</initialization>
+	</component>
+</sdkExtension>
