@@ -16,23 +16,58 @@
 		databound="true">
 		<jsInclude>res/js/echarts-all.js</jsInclude>
 		<jsInclude>res/js/component.js</jsInclude>
-		<property id="Min" 			title="Min" 				type="float"		group="Layout"/>
-		<property id="Max" 			title="Max" 				type="float"		group="Layout"/>
-		<property id="Precision" 	title="Precision" 			type="int"			group="Layout"/>
-		<property id="SplitNumber" 	title="Split Number" 		type="int"			group="Layout"/>
-		<property id="Color1" 		title="Color1" 				type="Color"		group="Layout"/>
-		<property id="Color2" 		title="Color2" 				type="Color"		group="Layout"/>
-		<property id="Color3" 		title="Color3" 				type="Color"		group="Layout"/>
-		<property id="Value1" 		title="Value1" 				type="float"		group="Layout"/>
-		<property id="Value2" 		title="Value2" 				type="float"		group="Layout"/>
-		<property id="Thick" 		title="Thick" 				type="int"			group="Layout"/>
+		<property id="Min" 			title="Min" 			   	type="float"		group="layout" 		bindable="true" />
+		<property id="Max" 			title="Max" 				type="float"		group="layout"		bindable="true"	/>
+		<property id="Color1" 		title="Color1"				type="Color"		group="Layout"/>
+		<property id="Color2" 		title="Color2"  			type="Color"		group="Layout"/>
+		<property id="Color3" 		title="Color3"  			type="Color"		group="Layout"/>
+		<property id="Value1" 		title="Value1"				type="float"		group="Layout"/>
+		<property id="Value2" 		title="Value2"  			type="float"		group="Layout"/>
+		<property id="Thick" 		title="Thick - Width"		type="int"			group="Layout"/>
 		<property id="TickValue" 	title="Tick Value" 			type="ResultCell"	group="DataBinding"	tooltip="Data"/>
-		<property id="ValueDesc" 	title="Value Description"	type="String"		group="Layout"/>
+		<property id="ValueDesc" 	title="Value Description"	type="String"		group="Layout" visible="false"/>
+		<property id="StartAngle" 	title="StartAngle"			type="float"		group="Layout"/>		
+		<property id="EndAngle" 	title="EndAngle"			type="float"		group="Layout"/>
 		<property id="onChange"		title="On Change" 			type="ScriptText"	group="Events"/>
+		<property id="Sign" 		title="Sign"				type="String"		group="Layout"/>
+		<property id="TickValueFontSize" 		title="Tick Value-Font Size"		type="float"		group="Layout"/>
+		<property id="TickValueFontFamily" 		title="Tick Value-Font Family"		type="String"		group="Layout"/>
+		<property id="SplitNumber" 				title="Split Number" 				type="int"			group="Layout"/>
+		<property id="SplitLineVisible" 		title="SplitLine - Visible"			type="boolean"		group="Layout"/>
+		<property id="SplitLineColor" 			title="SplitLine- Color"			type="String"		group="Layout"/>
+		<property id="SplitLineWidth" 			title="SplitLine- Width"			type="float"		group="Layout"/>
+		<property id="PointerLength" 			title="Pointer Length"				type="String"		group="Layout"/>
+		<property id="PointerWidth" 			title="Pointer width"				type="float"		group="Layout"/>
+		<property id="PointerColor" 			title="Pointer color"				type="Color"		group="Layout"/>
+		<property id="TooltipVisible" 			title="Tooltip Visible"				type="boolean"		group="Layout"/>
+		<property id="colorNum" 				title="color Number" 				type="int"			group="Layout" visible="false"/>
+		<property id="Rangevalues"	 			title="Rangevalues"					type="String"		group="Layout" visible="false"/>
+	
 		
 		<initialization>
 			<defaultValue property="WIDTH">400</defaultValue>
 			<defaultValue property="HEIGHT">400</defaultValue>
+			<defaultValue property="StartAngle">90</defaultValue>
+			<defaultValue property="EndAngle">-180</defaultValue>
+			<defaultValue property="Min">0</defaultValue>
+			<defaultValue property="Max">100</defaultValue>
+			<defaultValue property="Sign">%</defaultValue>
+			<defaultValue property="TickValueFontSize">30</defaultValue>
+			<defaultValue property="TickValueFontFamily">Arial</defaultValue>
+			<defaultValue property="Thick">6</defaultValue>
+			<defaultValue property="SplitNumber">1</defaultValue>
+			<defaultValue property="SplitLineVisible">true</defaultValue>
+			<defaultValue property="SplitLineColor">#C0C0C0</defaultValue>
+			<defaultValue property="SplitLineWidth">2</defaultValue>
+			<defaultValue property="PointerLength">80%</defaultValue>
+			<defaultValue property="PointerWidth">4</defaultValue>
+			<defaultValue property="PointerColor">red</defaultValue>
+			<defaultValue property="TooltipVisible">true</defaultValue>
+			<defaultValue property="Color1">#FF0000</defaultValue>
+			<defaultValue property="Color2">#FFEE00</defaultValue>
+			<defaultValue property="Color3">#00DF00</defaultValue>
+			<defaultValue property="Value1">0.3</defaultValue>
+			<defaultValue property="Value2">0.6</defaultValue>
 		</initialization>
 	</component>
 </sdkExtension>

@@ -4,6 +4,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	var dataResultSet = null;
 	var min = null; 		
 	var max = null; 		
+	var minNum = null; 		
+	var maxNum = null; 
 	var precision = null; 	
 	var splitnumber = null;
 	var color1 = null; 	
@@ -19,6 +21,21 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	var myChart = null;
 	var that = this;
 	var tickValueNum = null;
+	var startAngle = null;
+	var endAngle = null;
+	var sign = null;
+	var tickValueFontSize = null;
+	var tickValueFontFamily = null;
+	var splitLineVisible = null;
+	var splitLineColor = null;
+	var splitLineWidth = null;
+	var pointerLength = null;
+	var pointerWidth = null;
+	var pointerColor = null;
+	var tooltipVisible = null;
+	var colorNum = null;
+	var colorArray = [];
+
 	this.init = function() {
 		
 		if (this._alive){
@@ -36,17 +53,28 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 				return;
 			} else {
 				tickValueNum = tickValue.data[0];
+				minNum = min;
+				maxNum = max;
+			/*	for(i=colorNum;i<=colornum;i++)
+				{
+				var a ="["+color+i+","+value+i+"]";
+				colorArray.push(a);
+				}
+				*/
 				this.insertData();
 				reload = true;
 			}
 		}
+			
 	};
 	
 	this.insertData = function() {
 		
 		var option = {
 				tooltip : {
-					formatter: "{a} <br/>{b} : {c}%"
+					  show : tooltipVisible,
+					/*formatter:"{a} <br/> {c}"*/
+					formatter:"{b} <br/>"+'{c}'+sign
 				},
 				toolbox: {
 					show : false,
@@ -58,20 +86,21 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 				},
 				series : [
 					{
-						name: '',
+						name: valuedesc,
 						type:'gauge',
 						center : ['50%', '50%'],
 						radius : [0, '75%'],
-						startAngle: 90,
-						endAngle : -180,
-						min: min,
-						max: max,
+						startAngle: startAngle,
+						endAngle : endAngle,
+						min: minNum,
+						max: maxNum,
 						precision: precision,
 						splitNumber: splitNumber,
 						axisLine: {
 							show: true,
 							lineStyle: {
-								color: [[value1, color1],[value2, color2],[1, color3]], 
+										color: [[value1, color1],[value2, color2],[1, color3]], 
+								//color: colorArray1,
 								width: thick
 							}
 						},
@@ -86,33 +115,32 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 							}
 						},
 						splitLine: {
-							show: true,
+							show: splitLineVisible,
 							length :30,
 							lineStyle: {
-								color: '#eee',
-								width: 2,
+								color: splitLineColor,
+								width: splitLineWidth,
 								type: 'solid'
 							}
 						},
-						/*axisLabel: {
+					/*	axisLabel: {
 							show: true,
 							formatter: function(v){
 								switch (v+''){
-									case '10': return 'bad';
-									case '30': return 'better';
-									case '60': return 'good';
-									case '90': return 'best';
-									default: return '';
+								case '10': return '弱';
+		                        case '30': return '低';
+		                        case '60': return '中';
+		                        case '90': return '高';
 								}
 							},
 							textStyle: {
-								color: 'blue'
+								 color: 'red'
 							}
 						},*/
 					    pointer : {
-							length : '100%',
-							width : 4,
-							color : 'red'
+							length : pointerLength,
+							width : pointerWidth,
+							color : pointerColor
 						},
 					    title : {
 							show : true,
@@ -130,10 +158,11 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 							width: 100,
 							height: 40,
 							//offsetCenter: ['-60%', '-30%'],
-							formatter:'{value}%',
+							formatter:'{value}'+sign,
 							textStyle: {
 								color: '#000',
-								fontSize : 30
+								fontSize : tickValueFontSize,
+								fontFamily: tickValueFontFamily
 							}
 						},
 //						detail : {formatter:'{value}%'},
@@ -244,6 +273,17 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 		};
 	};
 	
+	this.Value3 = function(value) {
+		if(value===undefined) {
+			Reload = false;
+			return value3;
+		} else {
+			Reload = false;
+			value3 = value;
+			return this;
+		};
+	};
+	
 	this.Thick = function(value) {
 		if(value===undefined) {
 			Reload = false;
@@ -266,6 +306,9 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 		};
 	};
 	
+
+
+
 	this.ValueDesc = function(value) {
 		if(value===undefined) {
 			Reload = false;
@@ -276,4 +319,170 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 			return this;
 		};
 	};
+
+
+
+
+this.StartAngle = function(value) {
+	if(value===undefined) {
+		Reload = false;
+		return startAngle;
+	} else {
+		Reload = false;
+		startAngle = value;
+		return this;
+	};
+};
+
+this.EndAngle = function(value) {
+	if(value===undefined) {
+		Reload = false;
+		return endAngle;
+	} else {
+		Reload = false;
+		endAngle = value;
+		return this;
+		};
+	};
+	
+	this.Sign = function(value) {
+		if(value===undefined) {
+			Reload = false;
+			return sign;
+		} else {
+			Reload = false;
+			sign = value;
+			return this;
+			};
+		};
+		
+		this.TickValueFontSize = function(value) {
+			if(value===undefined) {
+				Reload = false;
+				return tickValueFontSize;
+			} else {
+				Reload = false;
+				tickValueFontSize = value;
+				return this;
+				};
+			};
+			
+			this.TickValueFontFamily = function(value) {
+				if(value===undefined) {
+					Reload = false;
+					return tickValueFontFamily;
+				} else {
+					Reload = false;
+					tickValueFontFamily = value;
+					return this;
+					};
+				};
+				
+				
+				
+				this.SplitLineVisible = function(value) {
+					if(value===undefined) {
+						Reload = false;
+						return splitLineVisible;
+					} else {
+						Reload = false;
+						splitLineVisible = value;
+						return this;
+						};
+					};
+					
+					this.SplitLineColor = function(value) {
+						if(value===undefined) {
+							Reload = false;
+							return splitLineColor;
+						} else {
+							Reload = false;
+							splitLineColor = value;
+							return this;
+							};
+						};
+						
+						this.SplitLineWidth = function(value) {
+							if(value===undefined) {
+								Reload = false;
+								return splitLineWidth;
+							} else {
+								Reload = false;
+								splitLineWidth = value;
+								return this;
+								};
+							};
+							
+							this.PointerLength = function(value) {
+								if(value===undefined) {
+									Reload = false;
+									return pointerLength;
+								} else {
+									Reload = false;
+									pointerLength = value;
+									return this;
+									};
+								};
+								
+								this.PointerWidth = function(value) {
+									if(value===undefined) {
+										Reload = false;
+										return pointerWidth;
+									} else {
+										Reload = false;
+										pointerWidth = value;
+										return this;
+										};
+									};
+				
+									this.PointerColor = function(value) {
+										if(value===undefined) {
+											Reload = false;
+											return pointerColor;
+										} else {
+											Reload = false;
+											pointerColor = value;
+											return this;
+											};
+										};
+										
+										this.TooltipVisible = function(value) {
+											if(value===undefined) {
+												Reload = false;
+												return tooltipVisible;
+											} else {
+												Reload = false;
+												tooltipVisible = value;
+												return this;
+												};
+											};
+											
+											this.ColorNum = function(value) {
+												if(value===undefined) {
+													Reload = false;
+													return colorNum;
+												} else {
+													Reload = false;
+													colorNum = value;
+													return this;
+													};
+												};
+
+												
+												this.Rangevalues = function(value) {
+													if(value===undefined) {
+														Reload = false;
+														return colorArray;
+													} else {
+														Reload = false;
+														colorArray = value;
+														// colorArray="["+colorArray+"]";
+													//	colorArray = eval(colorArray);
+													//	colorArray= JSON.parse("[" + colorArray + "]");
+													//	var colorArray1 = new Array();
+														//colorArray=colorArray.split("|");
+														
+														return this;
+														};
+													};
 });

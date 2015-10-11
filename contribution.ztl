@@ -35,8 +35,32 @@ class com.iprosis.sapui5.RangeSlider extends Component {
 		this.valueDesc = value2;
 	*}
 	
+		
 	/* Returns Current value description */
 	float getDesc() {*
 		return this.valueDesc;
 	*}
+	
+		/* Sets Current value description */
+	void setEndAngle(/* Value */ float endAngle) {*
+		this.endAngle = endAngle;
+	*}
+	
+	
+	/* Returns Current value description */
+	float getEndAngle() {*
+		return this.endAngle;
+	*}
+	
+			/* Sets Current value description */
+	void setEndAngle(/* Value */ float startAngle) {*
+		this.startAngle = startAngle;
+	*}
+	
+		/* Returns Current value description */
+	float getStartAngle() {*
+		return this.startAngle;
+	*}
 }
+
+
