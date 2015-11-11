@@ -1,8 +1,8 @@
-class com.iprosis.sapui5.RangeSlider extends Component {
+class com.iprosis.echart.Gauge extends Component {
 
 	/* Sets the Current minimum value. */
-	void setMin(/* Minimum value */ float min) {*
-		this.min = min;
+	void setMin(/* Minimum value */ float newMin) {*
+		this.Min = newMin;
 	*}
 	
 	/* Returns Current the minimum value. */
@@ -11,8 +11,8 @@ class com.iprosis.sapui5.RangeSlider extends Component {
 	*}
 
 	/* Sets the Current maximum value. */
-	void setMax(/* Maximum value */ float max) {*
-		this.max = max;
+	void setMax(/* Maximum value */ float newMax) {*
+		this.Max = newMax;
 	*}
 	
 	/* Returns the Current maximum value. */
@@ -35,32 +35,185 @@ class com.iprosis.sapui5.RangeSlider extends Component {
 		this.valueDesc = value2;
 	*}
 	
-		
 	/* Returns Current value description */
-	float getDesc() {*
+	string getDesc() {*
 		return this.valueDesc;
 	*}
 	
-		/* Sets Current value description */
-	void setEndAngle(/* Value */ float endAngle) {*
-		this.endAngle = endAngle;
+	
+	/* Sets Current value for thick width */
+	void setThickWidth(/* Value */ float value) {*
+		this.thick = value;
 	*}
 	
+	/* Returns Current value thick width */
+	float getThickWidth() {*
+		return this.thick;
+	*}
 	
-	/* Returns Current value description */
+		/* Sets Current value for StartAngle */
+	void setStartAngle(/* Value */ float value) {*
+		this.StartAngle = value;
+	*}
+	
+	/* Returns Current value StartAngle */
+	float getStartAngle() {*
+		return this.startAngle;
+	*}
+	
+			/* Sets Current value for End Angle */
+	void setEndAngle(/* Value */ float value) {*
+		this.endAngle = value;
+	*}
+	
+	/* Returns Current value End Angle */
 	float getEndAngle() {*
 		return this.endAngle;
 	*}
 	
-			/* Sets Current value description */
-	void setEndAngle(/* Value */ float startAngle) {*
-		this.startAngle = startAngle;
+	
+		/* Sets Current value for Sign like: % , $ , etc. */
+	void setSign(/* Value */ string value) {*
+		this.sign = value;
 	*}
 	
-		/* Returns Current value description */
-	float getStartAngle() {*
-		return this.startAngle;
+	/* Returns Current value Sign */
+	string getSign() {*
+		return this.sign;
 	*}
+	
+
+		/* Sets Current value for Tick Value-Font Size */
+	void setTickValueFontSize(/* Value */ float value) {*
+		this.tickValueFontSize = value;
+	*}
+	
+	/* Returns Current value Tick Value-Font Size */
+	float getTickValueFontSize() {*
+		return this.tickValueFontSize;
+	*}
+	
+			/* Sets Current value for TickValueFontFamily */
+	void setTickValueFontFamily(/* Value */ string value) {*
+		this.TickValueFontFamily = value;
+	*}
+	
+	/* Returns Current value TickValueFontFamily */
+	string getTickValueFontFamily() {*
+		return this.TickValueFontFamily;
+	*}
+	
+	
+	/* Sets Current value for SplitNumber */
+	void setSplitNumber(/* Value */ float value) {*
+		this.splitNumber = value;
+	*}
+	
+	/* Returns Current value SplitNumber */
+	float getSplitNumber() {*
+		return this.splitNumber;
+	*}
+	
+	
+		/* Sets Current value for SplitLineVisible */
+	void setSplitLineVisible(/* Value */ boolean value) {*
+		this.splitLineVisible = value;
+	*}
+	
+	/* Returns Current value SplitLineVisible */
+	boolean getSplitLineVisible() {*
+		return this.splitLineVisible;
+	*}
+	
+	
+	
+			/* Sets Current value for Split Line Color */
+	void setSplitLineColor(/* Value */ String value) {*
+		this.splitLineColor = value;
+	*}
+	
+	/* Returns Current value Split Line Color */
+	String getsetSplitLineColor() {*
+		return this.splitLineColor;
+	*}
+	
+				/* Sets Current value for Split Line Width */
+	void setSplitLineWidth(/* Value */ float value) {*
+		this.splitLineWidth = value;
+	*}
+	
+	/* Returns Current value Split Line Width */
+	float getSplitLineWidth() {*
+		return this.splitLineWidth;
+	*}
+	
+	
+	/* Sets Current value for Pointer Length for example: 80% , 25px etc. */
+	void setPointerLength(/* Value */ string value) {*
+		this.pointerLength = value;
+	*}
+	
+	/* Returns Current value Pointer Length  */
+	string getPointerLength() {*
+		return this.pointerLength;
+	*}
+	
+	
+	
+		/* Sets Current value for Pointer Width */
+	void setPointerWidth(/* Value */ float value) {*
+		this.pointerWidth = value;
+	*}
+	
+	/* Returns Current value Pointer Width  */
+	float getPointerWidth() {*
+		return this.pointerWidth;
+	*}
+	
+	
+			/* Sets Current value for Pointer color */
+	void setPointerColor(/* Value */ string value) {*
+		this.pointerColor = value;
+	*}
+	
+	/* Returns Current value Pointer Color   */
+	String getPointerColor() {*
+		return this.pointerColor;
+	*}
+	
+	
+				/* Sets Current value for Tool tip Visible */
+	void setTooltipVisible(/* Value */ boolean value) {*
+		this.tooltipVisible = value;
+	*}
+	
+	/* Returns Current value Tool tip Visible  */
+	boolean getTooltipVisible() {*
+		return this.tooltipVisible;
+	*}
+	
+
+	
+		/* Sets Current value for MaxMin Decimal */
+	void setMaxMinDecimal(/* Value */ float value) {*
+		this.maxMinDecimal = value;
+	*}
+	
+	/* Returns Current value MaxMin Decimal */
+	float getMaxMinDecimal() {*
+		return this.maxMinDecimal;
+	*}
+	
+	
+	
+					/* Sets Current value for Tick Value Visible */
+	void setTickValueVisible(/* Value */ boolean value) {*
+		this.tickValueVisiblee = value;
+	*}
+	
+	/* Returns Current value Tick Value Visible  */
+	boolean getTickValueVisiblee() {*
+		return this.tickValueVisible;
+	*}
+	
 }
-
-

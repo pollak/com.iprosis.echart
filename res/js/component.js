@@ -6,6 +6,7 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	var max = null; 		
 	var minNum = null; 		
 	var maxNum = null; 
+	var maxMinDecimal = null; 
 	var precision = null; 	
 	var splitnumber = null;
 	var color1 = null; 	
@@ -15,7 +16,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	var value2 = null; 	
 	var value3 = null; 	
 	var thick = null; 		
-	var tickValue = null; 		
+	var tickValue = null; 
+	var tickValueUser = null;
 	var valuedesc = null; 	
 	var reload = false;
 	var myChart = null;
@@ -34,8 +36,10 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	var pointerColor = null;
 	var tooltipVisible = null;
 	var colorNum = null;
+	var tickValueVisible = null;
 	var colorArray = [];
 
+	
 	this.init = function() {
 		
 		if (this._alive){
@@ -49,23 +53,30 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.afterUpdate = function() {
 		if (tickValue){
-			if (reload){
-				return;
-			} else {
+				if (tickValue=== Object)
 				tickValueNum = tickValue.data[0];
+				else 
+				tickValueNum = tickValue;
 				minNum = min;
 				maxNum = max;
-			/*	for(i=colorNum;i<=colornum;i++)
-				{
-				var a ="["+color+i+","+value+i+"]";
-				colorArray.push(a);
-				}
-				*/
+				tickValueUser = tickValueNum;
+				if(tickValueNum<minNum)
+					{
+					tickValueNum = minNum;
+					}
 				this.insertData();
 				reload = true;
-			}
 		}
 			
+	};
+	
+	this.getNumColor = function() {
+		return colorNum;
+	};
+	
+	
+	this.getcolorsArray = function() {
+		return tempcolorArray;
 	};
 	
 	this.insertData = function() {
@@ -73,7 +84,6 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 		var option = {
 				tooltip : {
 					  show : tooltipVisible,
-					/*formatter:"{a} <br/> {c}"*/
 					formatter:"{b} <br/>"+'{c}'+sign
 				},
 				toolbox: {
@@ -99,14 +109,14 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 						axisLine: {
 							show: true,
 							lineStyle: {
-										color: [[value1, color1],[value2, color2],[1, color3]], 
-								//color: colorArray1,
+							//	color: [[value1, color1],[value2, color2],[1, color3]], 
+							color: colorArray,
 								width: thick
 							}
 						},
 						axisTick: {
 							show: true,
-							splitNumber: 5,
+							splitNumber: 0,
 							length :10,
 							lineStyle: {
 								color: '#eee',
@@ -123,20 +133,18 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 								type: 'solid'
 							}
 						},
-					/*	axisLabel: {
-							show: true,
-							formatter: function(v){
-								switch (v+''){
-								case '10': return '弱';
-		                        case '30': return '低';
-		                        case '60': return '中';
-		                        case '90': return '高';
-								}
-							},
-							textStyle: {
-								 color: 'red'
-							}
-						},*/
+			            axisLabel: {         
+			                show: true,
+			                formatter: function(v){
+			                    switch (v+''){
+			                        case '10': return '10';
+			                        default: return parseFloat(v).toFixed(maxMinDecimal);
+			                    }
+			                },
+			                textStyle: {    
+			                    color: '#333'
+			                }
+			            },
 					    pointer : {
 							length : pointerLength,
 							width : pointerWidth,
@@ -151,14 +159,14 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 							}
 						},
 						detail : {
-							show : true,
+							show : tickValueVisible,
 							backgroundColor: 'rgba(0,0,0,0)',
 							borderWidth: 0,
 							borderColor: '#ccc',
 							width: 100,
 							height: 40,
 							//offsetCenter: ['-60%', '-30%'],
-							formatter:'{value}'+sign,
+							formatter:tickValueUser+sign,
 							textStyle: {
 								color: '#000',
 								fontSize : tickValueFontSize,
@@ -176,10 +184,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Min = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return min;
 		} else {
-			Reload = false;
 			min = value;
 			return this;
 		};
@@ -187,21 +193,29 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Max = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return max;
 		} else {
-			Reload = false;
 			max = value;
 			return this;
 		};
 	};
 	
+	
+	this.MaxMinDecimal = function(value) {
+		if(value===undefined) {
+			return maxMinDecimal;
+		} else {
+			maxMinDecimal = value;
+			return this;
+		};
+	};
+	
+	
+	
 	this.Precision = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return precision;
 		} else {
-			Reload = false;
 			precision = value;
 			return this;
 		};
@@ -209,21 +223,17 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.SplitNumber = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return splitNumber;
 		} else {
-			Reload = false;
 			splitNumber = value;
 			return this;
 		};
 	};
 	
-	this.Color1 = function(value) {
+	/*this.Color1 = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return color1;
 		} else {
-			Reload = false;
 			color1 = value;
 			return this;
 		};
@@ -231,10 +241,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Color2 = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return color2;
 		} else {
-			Reload = false;
 			color2 = value;
 			return this;
 		};
@@ -242,10 +250,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Color3 = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return color3;
 		} else {
-			Reload = false;
 			color3 = value;
 			return this;
 		};
@@ -253,10 +259,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Value1 = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return value1;
 		} else {
-			Reload = false;
 			value1 = value;
 			return this;
 		};
@@ -264,10 +268,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Value2 = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return value2;
 		} else {
-			Reload = false;
 			value2 = value;
 			return this;
 		};
@@ -275,21 +277,17 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.Value3 = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return value3;
 		} else {
-			Reload = false;
 			value3 = value;
 			return this;
 		};
 	};
-	
+	*/
 	this.Thick = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return thick;
 		} else {
-			Reload = false;
 			thick = value;
 			return this;
 		};
@@ -297,10 +295,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	
 	this.TickValue = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return tickValue;
 		} else {
-			Reload = false;
 			tickValue = value;
 			return this;
 		};
@@ -311,10 +307,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 
 	this.ValueDesc = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return valueDesc;
 		} else {
-			Reload = false;
 			valueDesc = value;
 			return this;
 		};
@@ -325,10 +319,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 
 this.StartAngle = function(value) {
 	if(value===undefined) {
-		Reload = false;
 		return startAngle;
 	} else {
-		Reload = false;
 		startAngle = value;
 		return this;
 	};
@@ -336,10 +328,8 @@ this.StartAngle = function(value) {
 
 this.EndAngle = function(value) {
 	if(value===undefined) {
-		Reload = false;
 		return endAngle;
 	} else {
-		Reload = false;
 		endAngle = value;
 		return this;
 		};
@@ -347,10 +337,8 @@ this.EndAngle = function(value) {
 	
 	this.Sign = function(value) {
 		if(value===undefined) {
-			Reload = false;
 			return sign;
 		} else {
-			Reload = false;
 			sign = value;
 			return this;
 			};
@@ -358,10 +346,8 @@ this.EndAngle = function(value) {
 		
 		this.TickValueFontSize = function(value) {
 			if(value===undefined) {
-				Reload = false;
 				return tickValueFontSize;
 			} else {
-				Reload = false;
 				tickValueFontSize = value;
 				return this;
 				};
@@ -369,10 +355,8 @@ this.EndAngle = function(value) {
 			
 			this.TickValueFontFamily = function(value) {
 				if(value===undefined) {
-					Reload = false;
 					return tickValueFontFamily;
 				} else {
-					Reload = false;
 					tickValueFontFamily = value;
 					return this;
 					};
@@ -382,21 +366,28 @@ this.EndAngle = function(value) {
 				
 				this.SplitLineVisible = function(value) {
 					if(value===undefined) {
-						Reload = false;
 						return splitLineVisible;
 					} else {
-						Reload = false;
 						splitLineVisible = value;
 						return this;
 						};
 					};
 					
+					
+					this.TickValueVisible = function(value) {
+						if(value===undefined) {
+							return tickValueVisible;
+						} else {
+							tickValueVisible = value;
+							return this;
+							};
+						};
+						
+					
 					this.SplitLineColor = function(value) {
 						if(value===undefined) {
-							Reload = false;
 							return splitLineColor;
 						} else {
-							Reload = false;
 							splitLineColor = value;
 							return this;
 							};
@@ -404,10 +395,8 @@ this.EndAngle = function(value) {
 						
 						this.SplitLineWidth = function(value) {
 							if(value===undefined) {
-								Reload = false;
 								return splitLineWidth;
 							} else {
-								Reload = false;
 								splitLineWidth = value;
 								return this;
 								};
@@ -415,10 +404,8 @@ this.EndAngle = function(value) {
 							
 							this.PointerLength = function(value) {
 								if(value===undefined) {
-									Reload = false;
 									return pointerLength;
 								} else {
-									Reload = false;
 									pointerLength = value;
 									return this;
 									};
@@ -426,10 +413,8 @@ this.EndAngle = function(value) {
 								
 								this.PointerWidth = function(value) {
 									if(value===undefined) {
-										Reload = false;
 										return pointerWidth;
 									} else {
-										Reload = false;
 										pointerWidth = value;
 										return this;
 										};
@@ -437,10 +422,8 @@ this.EndAngle = function(value) {
 				
 									this.PointerColor = function(value) {
 										if(value===undefined) {
-											Reload = false;
 											return pointerColor;
 										} else {
-											Reload = false;
 											pointerColor = value;
 											return this;
 											};
@@ -448,10 +431,8 @@ this.EndAngle = function(value) {
 										
 										this.TooltipVisible = function(value) {
 											if(value===undefined) {
-												Reload = false;
 												return tooltipVisible;
 											} else {
-												Reload = false;
 												tooltipVisible = value;
 												return this;
 												};
@@ -459,10 +440,8 @@ this.EndAngle = function(value) {
 											
 											this.ColorNum = function(value) {
 												if(value===undefined) {
-													Reload = false;
 													return colorNum;
 												} else {
-													Reload = false;
 													colorNum = value;
 													return this;
 													};
@@ -471,17 +450,11 @@ this.EndAngle = function(value) {
 												
 												this.Rangevalues = function(value) {
 													if(value===undefined) {
-														Reload = false;
 														return colorArray;
 													} else {
-														Reload = false;
-														colorArray = value;
-														// colorArray="["+colorArray+"]";
-													//	colorArray = eval(colorArray);
-													//	colorArray= JSON.parse("[" + colorArray + "]");
-													//	var colorArray1 = new Array();
-														//colorArray=colorArray.split("|");
-														
+														tempcolorArray=value;
+														colorArray = eval(value);
+
 														return this;
 														};
 													};
