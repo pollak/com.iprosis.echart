@@ -46,7 +46,8 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 			return;
 		} else {
 			
-			myChart = echarts.init(document.getElementById(this.$().attr('id'))); 
+			myChart = echarts.init(document.getElementById(this.$().attr('id')));
+			this.$().addClass('gauge-css');
 			this._alive = true;
 		}
 	};

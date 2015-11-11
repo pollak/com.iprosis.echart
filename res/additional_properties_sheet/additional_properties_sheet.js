@@ -48,10 +48,8 @@ sap.designstudio.sdk.PropertyPage.subclass("com.iprosis.echart.GaugePropertyPage
 	function fillDropDown() {
 		var NumcolorVal = that.callRuntimeHandler("getNumColor");
 		var colorsArray = that.callRuntimeHandler("getcolorsArray");
-		//alert(NumcolorVal);
 		colorsArray=eval(colorsArray);
 		$("#colors").val(NumcolorVal);
-		//alert(colorsArray);
 		var formval = "<table >";
 		for(i=1;i<NumcolorVal;i++){
 		formval +="<tr><td>Color"+i+"</td> <td><input id='aps_color"+i+"' type='text' size='15' maxlength='20' value='"+colorsArray[i-1][1]+"'> </td><td>Value"+i+"</td> <td><input id='aps_value"+i+"' type='text' size='20' maxlength='15' value='"+i/10+"' style='font-size:12px'></td></tr>"
