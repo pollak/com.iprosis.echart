@@ -43,13 +43,11 @@
 		<property id="PointerWidth" 			title="Pointer width"				type="float"		group="Layout"/>
 		<property id="PointerColor" 			title="Pointer color"				type="Color"		group="Layout"/>
 		<property id="TooltipVisible" 			title="Tooltip Visible"				type="boolean"		group="Layout"/>
-		<property id="Rangevalues"	 			title="Rangevalues"					type="String"		group="Layout" visible="true"/>
-		<property id="ColorNum"	 				title="ColorNum"					type="int"		group="Layout" visible="true"/>
-		
-		
-		
+		<property id="Rangevalues"	 			title="Rangevalues"					type="String"		group="Layout" visible="false"/>
+		<property id="ColorNum"	 				title="ColorNum"					type="int"		group="Layout" visible="false"/>
+
 		<initialization>
-			<defaultValue property="WIDTH">400</defaultValue>
+			<defaultValue property="Width">400</defaultValue>
 			<defaultValue property="HEIGHT">400</defaultValue>
 			<defaultValue property="StartAngle">90</defaultValue>
 			<defaultValue property="EndAngle">-180</defaultValue>

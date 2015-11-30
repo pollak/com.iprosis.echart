@@ -38,7 +38,7 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 	var colorNum = null;
 	var tickValueVisible = null;
 	var colorArray = [];
-
+	var idElemnt = null;
 	
 	this.init = function() {
 		
@@ -49,9 +49,10 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 			myChart = echarts.init(document.getElementById(this.$().attr('id')));
 			this.$().addClass('gauge-css');
 			this._alive = true;
+
 		}
 	};
-	
+		
 	this.afterUpdate = function() {
 		if (tickValue){
 				if (tickValue=== Object)
@@ -75,7 +76,7 @@ sap.designstudio.sdk.Component.subclass("com.iprosis.echart.Gauge", function() {
 		return colorNum;
 	};
 	
-	
+
 	this.getcolorsArray = function() {
 		return tempcolorArray;
 	};
